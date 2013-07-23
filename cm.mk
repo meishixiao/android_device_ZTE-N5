@@ -3,7 +3,7 @@ $(call inherit-product, vendor/cm/config/gsm.mk)
 
 # Release name
 PRODUCT_RELEASE_NAME := n5
-
+	
 # Inherit some common CM stuff.
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 
@@ -15,4 +15,8 @@ PRODUCT_DEVICE := n5
 PRODUCT_NAME := cm_n5
 PRODUCT_BRAND := zte
 PRODUCT_MODEL := n5
-PRODUCT_MANUFACTURER := zte
+PRODUCT_MANUFACTURER := ztea
+
+# Boot animation
+TARGET_SCREEN_HEIGHT := 1280
+TARGET_SCREEN_WIDTH := 720
