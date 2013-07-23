@@ -337,7 +337,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # We have enough space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
 
-PRODUCT_CHARACTERISTICS := nosdcard
+PRODUCT_CHARACTERISTICS := default
 
 # Set build date
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
