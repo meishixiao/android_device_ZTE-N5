@@ -44,9 +44,11 @@ start_sensors()
     if [ ! -s /data/system/sensors/settings ]; then
         # If the settings file is empty, enable sensors HAL
         # Otherwise leave the file with it's current contents
-        echo 1 > /data/system/sensors/settings
+#ZTEBSP fanjiankang for non-dsps sensors +++
+#        echo 1 > /data/system/sensors/settings
     fi
-    start sensors
+#    start sensors
+#ZTEBSP fanjiankang for non-dsps sensors ---
 }
 
 start_battery_monitor()
@@ -74,7 +76,7 @@ done
 # Start gpsone_daemon for SVLTE Type I & II devices
 #
 case "$target" in
-        "msm7630_fusion")
+        "msm7630_fusion" | "msm8960")
         start gpsone_daemon
 esac
 case "$baseband" in
@@ -82,28 +84,21 @@ case "$baseband" in
         start gpsone_daemon
         start bridgemgrd
 esac
+case "$target" in
+        "msm7630_surf" | "msm8660" | "msm8960")
+        start quipc_igsn
+esac
+case "$target" in
+        "msm7630_surf" | "msm8660" | "msm8960")
+        start quipc_main
+esac
 
-#ifndef VENDOR_EDIT
-#DuYuanHua@OnLineRD.AirService.GPS, 2012/12/25, Delete feature QuIPS 
-#case "$target" in
-#        "msm7630_surf" | "msm8660" | "msm8960")
-#        start quipc_igsn
-#esac
-#case "$target" in
-#        "msm7630_surf" | "msm8660" | "msm8960")
-#        start quipc_main
-#esac
-#endif /* VENDOR_EDIT */
-
-#ifndef VENDOR_EDIT
-#DuYuanHua@OnLineRD.AirService.GPS, 2012/10/10, Delete feature XTWIFI 
-#case "$target" in
-#        "msm8960")
-#       start location_mq
-#        start xtwifi_inet
-#       start xtwifi_client
-#esac
-#endif /* VENDOR_EDIT */
+case "$target" in
+        "msm8960")
+        start location_mq
+        start xtwifi_inet
+        start xtwifi_client
+esac
 
 case "$target" in
     "msm7630_surf" | "msm7630_1x" | "msm7630_fusion")

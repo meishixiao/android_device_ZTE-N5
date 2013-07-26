@@ -31,7 +31,6 @@ target=`getprop ro.board.platform`
 soc_hwplatform=`cat /sys/devices/system/soc/soc0/hw_platform` 2> /dev/null
 soc_hwid=`cat /sys/devices/system/soc/soc0/id` 2> /dev/null
 soc_hwver=`cat /sys/devices/system/soc/soc0/platform_version` 2> /dev/null
-zte_hwver=`getprop ro.pcb_version`
 
 
 # Dynamic Memory Managment (DMM) provides a sys file system to the userspace
@@ -230,16 +229,8 @@ case "$target" in
 
                 setprop ro.sf.lcd_density 160
                 ;;
-            "MTP")               
-                case "$zte_hwver" in
-                    "evb")
-                        setprop ro.sf.lcd_density 240
-                        ;;
-                    *)
-                        setprop ro.sf.lcd_density 480
-                        setprop qemu.hw.mainkeys 1                      
-                        ;;
-                esac
+            "MTP")
+                setprop ro.sf.lcd_density 240
                 ;;
             *)
                 case "$soc_hwid" in

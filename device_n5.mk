@@ -29,22 +29,13 @@ PRODUCT_COPY_FILES += \
 
 # Boot ramdisk setup
 PRODUCT_COPY_FILES += \
-	device/$(BOARD_VENDOR)/$(TARGET_DEVICE)/ramdisk/at.rle:root/at.rle \
-	device/$(BOARD_VENDOR)/$(TARGET_DEVICE)/ramdisk/factorylogo.rle:root/factorylogo.rle \
-	device/$(BOARD_VENDOR)/$(TARGET_DEVICE)/ramdisk/fastboot.rle:root/fastboot.rle \
 	device/$(BOARD_VENDOR)/$(TARGET_DEVICE)/ramdisk/fstab.$(TARGET_DEVICE):root/fstab.$(TARGET_DEVICE) \
-	device/$(BOARD_VENDOR)/$(TARGET_DEVICE)/ramdisk/init.at.rc:root/init.at.rc \
-	device/$(BOARD_VENDOR)/$(TARGET_DEVICE)/ramdisk/initlogo.rle:root/initlogo.rle \
-	device/$(BOARD_VENDOR)/$(TARGET_DEVICE)/ramdisk/init.$(BOARD_VENDOR).usb.rc:root/init.$(BOARD_VENDOR).usb.rc \
-	device/$(BOARD_VENDOR)/$(TARGET_DEVICE)/ramdisk/init.target.rc:root/init.target.rc \
 	device/$(BOARD_VENDOR)/$(TARGET_DEVICE)/ramdisk/init.qcom.class_core.sh:root/init.qcom.class_core.sh \
 	device/$(BOARD_VENDOR)/$(TARGET_DEVICE)/ramdisk/init.qcom.class_main.sh:root/init.qcom.class_main.sh \
 	device/$(BOARD_VENDOR)/$(TARGET_DEVICE)/ramdisk/init.$(TARGET_DEVICE).rc:root/init.$(TARGET_DEVICE).rc \
 	device/$(BOARD_VENDOR)/$(TARGET_DEVICE)/ramdisk/init.qcom.sh:root/init.qcom.sh \
 	device/$(BOARD_VENDOR)/$(TARGET_DEVICE)/ramdisk/init.qcom.usb.sh:root/init.qcom.usb.sh \
-	device/$(BOARD_VENDOR)/$(TARGET_DEVICE)/ramdisk/init.rf.rc:root/init.rf.rc \
-	device/$(BOARD_VENDOR)/$(TARGET_DEVICE)/ramdisk/ueventd.$(TARGET_DEVICE).rc:root/ueventd.$(TARGET_DEVICE).rc \
-	device/$(BOARD_VENDOR)/$(TARGET_DEVICE)/ramdisk/wlan.rle:root/wlan.rle
+	device/$(BOARD_VENDOR)/$(TARGET_DEVICE)/ramdisk/ueventd.$(TARGET_DEVICE).rc:root/ueventd.$(TARGET_DEVICE).rc 
 
 # Qualcomm scripts
 PRODUCT_COPY_FILES += \
@@ -62,18 +53,6 @@ PRODUCT_COPY_FILES += \
     device/$(BOARD_VENDOR)/$(TARGET_DEVICE)/configs/init.qcom.thermald_conf.sh:system/etc/init.qcom.thermald_conf.sh \
     device/$(BOARD_VENDOR)/$(TARGET_DEVICE)/configs/init.qcom.wifi.sh:system/etc/init.qcom.wifi.sh \
     device/$(BOARD_VENDOR)/$(TARGET_DEVICE)/configs/usf_post_boot.sh:system/etc/usf_post_boot.sh
-
-# NFCEE access control
-ifeq ($(TARGET_BUILD_VARIANT),user)
-    NFCEE_ACCESS_PATH := device/$(BOARD_VENDOR)/$(TARGET_DEVICE)/configs/nfcee_access.xml
-else
-    NFCEE_ACCESS_PATH := device/$(BOARD_VENDOR)/$(TARGET_DEVICE)/configs/nfcee_access_debug.xml
-endif
-
-PRODUCT_COPY_FILES += \
-    $(NFCEE_ACCESS_PATH):system/etc/nfcee_access.xml \
-    frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
-    frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml
 
 # WLAN
 PRODUCT_COPY_FILES += \
@@ -148,15 +127,6 @@ PRODUCT_PACKAGES += \
 # Keystore
 PRODUCT_PACKAGES += \
 	keystore.default
-
-# NFC
-PRODUCT_PACKAGES += \
-	libnfc \
-	libnfc_ndef \
-	libnfc_jni \
-	Nfc \
-	Tag \
-	com.android.nfc_extras
 
 # OMX
 PRODUCT_PACKAGES += \
@@ -271,8 +241,6 @@ PRODUCT_COPY_FILES += \
 
 # Permissions
 PRODUCT_COPY_FILES += \
-	frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
-	frameworks/base/nfc-extras/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
 	frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml
 
 # Permissions

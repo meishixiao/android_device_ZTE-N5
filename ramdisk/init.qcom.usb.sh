@@ -36,12 +36,16 @@
 serialno=`getprop persist.usb.serialno`
 case "$serialno" in
     "")
-    serialnum=`getprop ro.serialno`
-    case "$serialnum" in
-        "");; #Do nothing, use default serial number
-        *)
+    # serialnum=`getprop ro.serialno`
+    # [ECID:000000] ZTEBSP modify by zhoufan for usb serialno 20120924++
+    serialnum=`getprop ro.product.name`
+    # [ECID:000000] ZTEBSP modify by zhoufan for usb serialno20120924--
+    #case "$serialnum" in
+       # "");; #Do nothing, use default serial number
+    # * )
         echo "$serialnum" > /sys/class/android_usb/android0/iSerial
-    esac
+    # [ECID:000000] ZTEBSP modify by liwen for  usb serialno20120206
+    # esac
     ;;
     *)
     echo "$serialno" > /sys/class/android_usb/android0/iSerial
@@ -80,17 +84,11 @@ case "$usbcurrentlimit" in
 	;;
     esac
 esac
-
-
 #
 # Allow USB enumeration with default PID/VID
 #
-#ifdef VENDOR_EDIT
-#yansen@OnLine.SysSrv.USB, 2012/11/21, modify for user do not need diag com
-# setprop sys.usb.config.extra diag
-# setprop persist.service.adb.enable 1
-#endif
-
+#zhangjing delete,extra usb state,20121124
+#setprop sys.usb.config.extra diag
 baseband=`getprop ro.baseband`
 echo 1  > /sys/class/android_usb/f_mass_storage/lun/nofua
 usb_config=`getprop persist.sys.usb.config`
@@ -103,21 +101,8 @@ case "$usb_config" in
             "msm8960")
                 case "$baseband" in
                     "mdm")
-                         #setprop persist.sys.usb.config diag,diag_mdm,serial_hsic,serial_tty,rmnet_hsic,mass_storage,adb
-                         #added by songxh for wlan and rf test begain 2012-10-23
-                         ftmmode=`getprop ro.wandrfmode`
-                         case "$ftmmode" in
-                             "1")
-                                  setprop persist.sys.usb.config diag,adb
-                             ;;
-                             "2")
-                                  setprop persist.sys.usb.config diag_mdm,adb
-                             ;;
-                             *)
-                                  setprop persist.sys.usb.config mass_storage
-                             ;;
-                         esac
-                         #added by songxh for wlan and rf test end 2012-10-23
+                        # setprop persist.sys.usb.config diag,diag_mdm,serial_hsic,serial_tty,rmnet_hsic,mass_storage,adb
+                     setprop persist.sys.usb.config diag,diag_mdm,modem,nmea,at,adb                               
                     ;;
                     "sglte")
                          setprop persist.sys.usb.config diag,diag_mdm,serial_smd,serial_tty,serial_hsuart,rmnet_hsuart,mass_storage,adb
@@ -145,19 +130,7 @@ case "$usb_config" in
             ;;
         esac
     ;;
-    * ) 
-        #added by songxh for wlan and rf test begain 2013-01-10
-        ftmmode=`getprop ro.wandrfmode`
-        case "$ftmmode" in
-           "1")
-                 setprop persist.sys.usb.config diag,adb
-           ;;
-           "2")
-                 setprop persist.sys.usb.config diag_mdm,adb
-           ;;
-       esac
-       #added by songxh for wlan and rf test end 2013-01-10   
-    ;; #USB persist config exists, do nothing
+    * ) ;; #USB persist config exists, do nothing
 esac
 
 #

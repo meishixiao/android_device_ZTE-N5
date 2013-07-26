@@ -96,8 +96,6 @@ lib/libdrmdiag.so
 lib/libdrmfs.so
 lib/libdrmtime.so
 
-# NFC
-lib/hw/nfc.default.so
 
 # Qualcomm
 lib/libdiag.so

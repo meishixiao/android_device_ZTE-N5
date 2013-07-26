@@ -3,7 +3,7 @@ TARGET_DEVICE = n5
 
 TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_DIR)/include
 TARGET_BOARD_PLATFORM := msm8960
-TARGET_BOARD_PLATFORM_GPU := qcom-adreno320
+TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
 #TODO TARGET_KERNEL_SOURCE := kernel/$(BOARD_VENDOR)/$(TARGET_DEVICE)
 #TODO TARGET_KERNEL_CONFIG := $(TARGET_DEVICE)_defconfig
 
@@ -127,3 +127,8 @@ BOARD_CHARGER_ENABLE_SUSPEND := true
 ENABLE_WEBGL := true 
 TARGET_FORCE_CPU_UPLOAD := true
 
+BOARD_CUSTOM_GRAPHICS := ../../../device/zte/n5/recovery_en/graphics.c
+BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/zte/n5/recovery_en/recovery_ui.c
+TARGET_PREBUILT_RECOVERY_KERNEL := device/zte/n5/recovery_kernel
+TARGET_RECOVERY_INITRC := device/zte/n5/recovery_en/recovery.rc
+TARGET_RECOVERY_FSTAB := device/zte/n5/recovery.fstab
